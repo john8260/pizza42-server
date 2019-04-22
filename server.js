@@ -41,5 +41,5 @@ app.get('/api/private', checkJwt, checkScopes, function(req, res) {
   res.json({ message: "response from API: OK ", code: 200 });
 });
 
-app.listen(5000);
-console.log('Server listening on http://localhost:5000. The React app will be built and served at http://localhost:5000.');
+app.listen(8080);
+console.log('Server listening on http://localhost:8080. The React app will be built and served at http://localhost:8080.');
