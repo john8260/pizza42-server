@@ -9,9 +9,9 @@ var data = require('./data');
 require('dotenv').config();
 
 
-// if (!process.env.REACT_APP_DOMAIN || !process.env.AUTH0_AUDIENCE) {
-//   throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file'
-// }
+if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
+  throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file'
+}
 
 app.use(cors());
 app.use(morgan('API Request (port 5000): :method :url :status :response-time ms - :res[content-length]'));
@@ -22,12 +22,12 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://john8260.au.auth0.com/.well-known/jwks.json`
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
   }), 
 
   // Validate the audience and the issuer.
   audience: process.env.AUTH0_AUDIENCE,
-  issuer: `https://john8260.au.auth0.com/`,
+  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
   algorithms: ['RS256']
 });
 
@@ -41,6 +41,5 @@ app.get('/api/private', checkJwt, checkScopes, function(req, res) {
   res.json({ message: "response from API: OK ", code: 200 });
 });
 
-// app.listen(8080);
 app.listen(process.env.PORT || 8888)
 console.log('Server listening on http://localhost:8888. The React app will be built and served at http://localhost:8888.');
