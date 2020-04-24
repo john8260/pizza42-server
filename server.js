@@ -46,7 +46,8 @@ app.get("/api/private", checkJwt, checkScopes, function (req, res) {
   res.json({ message: "response from API: OK ", code: 200 });
 });
 
-app.listen(process.env.PORT || 8888);
+app.listen(process.env.PORT || 5000);
 console.log(
-  "Server listening on http://localhost:8888. The React app will be built and served at http://localhost:8888."
+  "Server listening on http://localhost:%d. The React app will be built and served at http://localhost:3000.",
+  process.env.PORT
 );
