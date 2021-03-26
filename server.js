@@ -16,8 +16,8 @@ app.use(cors());
 app.use(
   morgan(
     "API Request (port " +
-      process.env.PORT +
-      "): :method :url :status :response-time ms - :res[content-length]"
+    process.env.PORT +
+    "): :method :url :status :response-time ms - :res[content-length]"
   )
 );
 
@@ -36,7 +36,7 @@ const checkJwt = jwt({
   algorithms: ["RS256"],
 });
 
-const checkScopes = jwtAuthz(["read:products"]);
+const checkScopes = jwtAuthz(["purchase:products"]);
 
 app.get("/api/products", function (req, res) {
   res.json({ products: data.pizzas });
