@@ -49,9 +49,8 @@ app.post("/webhooks", async (req, res) => {
   // Handle the event
   switch (eventType) {
     case 'payment_intent.succeeded':
-      // Fulfill any orders, e-mail receipts, etc
+      // Fulfill any orders, e-mail receipts, update DB, etc
       console.log(`💰 Payment from ${data.object.receipt_email} received! Total Amount: $${data.object.amount / 100}`);
-      // console.log(`💰 Payment received!`);
       break;
     default:
       console.log(`⚠️ Unexpected event type ${eventType}`);
@@ -67,7 +66,4 @@ app.post("/webhooks", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 5000);
-console.log(
-  "Server listening on http://localhost:%d. The React app will be built and served at http://localhost:3000.",
-  process.env.PORT || 5000
-);
+console.log("Server listening on http://localhost:%d.", process.env.PORT || 5000);
