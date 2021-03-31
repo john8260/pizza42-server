@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
-const data = require("../data");
+const data = require("./data");
 
 app.use(cors({ origin: true }));
 
