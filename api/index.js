@@ -18,6 +18,11 @@ app.use(
 
 app.use(express.json());
 
+app.get("/", function (req, res) {
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
+  res.json("Hello from pizza 42 🍕");
+});
+
 app.get("/api/products", function (req, res) {
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
   res.json({ products: data.pizzas });
